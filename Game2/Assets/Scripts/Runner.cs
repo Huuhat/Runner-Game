@@ -15,11 +15,14 @@ public class Runner : MonoBehaviour
 
     [SerializeField] RoadLine roadLine;
     [SerializeField] Rigidbody rigidBody;
+    [SerializeField] Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         roadLine = RoadLine.MIDDLE;
+
+        animator = GetComponent<Animator>();
 
         rigidBody = GetComponent<Rigidbody>();
     }
@@ -43,7 +46,8 @@ public class Runner : MonoBehaviour
         {
             if (roadLine != RoadLine.LEFT)
             {
-                roadLine--;
+             roadLine--; 
+                animator.Play("Left Avoid");
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -51,6 +55,8 @@ public class Runner : MonoBehaviour
             if ((roadLine != RoadLine.RIGHT))
             {
                 roadLine++;
+
+                animator.Play("Right Avoid");
             }
 
         }
