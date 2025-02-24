@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Build.Content;
+using UnityEngine;
+
+public class GameManager : Singleton<GameManager>
+{
+    private bool state;
+
+    public bool State {  get { return state; } }
+
+    public void Execute()
+    {
+        state = true;
+    }    
+
+    public void Finish()
+    {
+        state = false;
+
+
+    }
+}
