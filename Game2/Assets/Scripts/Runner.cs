@@ -18,7 +18,11 @@ public class Runner : MonoBehaviour
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] Animator animator;
 
-    
+    private void OnEnable()
+    {
+        InputManager.Instance.action += OnKeyUpdate;
+    }
+
     void Start()
     {
         roadLine = RoadLine.MIDDLE;
@@ -28,15 +32,7 @@ public class Runner : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        OnKeyUpdate();
-
-    }
-
-
+    
     private void FixedUpdate()
     {
         Move();
@@ -83,4 +79,9 @@ public class Runner : MonoBehaviour
             );
             
             }
+
+    private void OnDisable()
+    {
+        InputManager.Instance.action -= OnKeyUpdate;
+    }
 }

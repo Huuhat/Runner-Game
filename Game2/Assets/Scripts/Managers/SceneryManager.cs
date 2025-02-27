@@ -15,6 +15,27 @@ public class SceneryManager : Singleton<SceneryManager>
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    public IEnumerator FadeIn()
+    {
+        Color color = screenImage.color;
+
+        color.a = 1f;
+
+        screenImage.gameObject.SetActive(true);
+
+        while(color.a >= 0.0f)
+        {
+            color.a -= Time.deltaTime;
+
+            screenImage.color = color;
+
+            yield return null;
+        }
+
+        screenImage.gameObject.SetActive(false);
+    }
+
+
     public IEnumerator AsyncLoad(int index)
     {
        
@@ -65,7 +86,7 @@ public class SceneryManager : Singleton<SceneryManager>
 
     void OnSceneLoaded(Scene scene,LoadSceneMode loadSceneMode)
     {
-
+        StartCoroutine(FadeIn());
     }
     private void OnDisable()
     {
